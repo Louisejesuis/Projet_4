@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1 class="my-3 mx-auto">Créer un compte</h1>
+        </div>
+        <div class="col-6 mx-auto">
+        {{ form_start(form) }}
+        {{ form_row(form.fullName) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password.first) }}
+        {{ form_row(form.password.second) }}
+
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+        {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

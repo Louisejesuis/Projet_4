@@ -5,9 +5,12 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('build/css/app.css') }}"/>
         <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/united/bootstrap.min.css" rel="stylesheet" integrity="sha384-9nkB73MkhCaHgW6bdX2EbWnwXl8FUs1fTnR1UKUuic9Zqs/3u9VunCE/0hleKeUs" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('build/css/variable.css') }}"/>
         {% block stylesheets %}{% endblock %}
     <body>
-        {% block body %}{% endblock %}
+    {% include 'include/navbar.html.twig' %}
+
+    {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
