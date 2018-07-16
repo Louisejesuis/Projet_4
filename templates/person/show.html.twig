@@ -1,31 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Person{% endblock %}
+{% block title %}Annonce | {{ person.id }}{% endblock %}
 
 {% block body %}
-    <h1>Person</h1>
+    <h1>Annonce n°{{ person.id }}</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ person.id }}</td>
-            </tr>
-            <tr>
-                <th>FirstName</th>
+                <th>Prénom</th>
                 <td>{{ person.firstName }}</td>
             </tr>
             <tr>
-                <th>LastName</th>
+                <th>Nom</th>
                 <td>{{ person.lastName }}</td>
             </tr>
             <tr>
-                <th>BirthDate</th>
+                <th>Date de naissance</th>
                 <td>{{ person.birthDate ? person.birthDate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Picture</th>
-                <td>{{ person.picture }}</td>
+                <th>Photo</th>
+                <td><img src="{{ vich_uploader_asset(person, 'imageFile') }}" class="img-fluid"></td>
             </tr>
             <tr>
                 <th>Description</th>
@@ -34,9 +30,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('person_index') }}">back to list</a>
+    <a href="{{ path('person_index') }}">Retour à la liste des annonces</a>
 
-    <a href="{{ path('person_edit', {'id': person.id}) }}">edit</a>
+    <a href="{{ path('person_edit', {'id': person.id}) }}">Éditer l'annonce</a>
 
     {{ include('person/_delete_form.html.twig') }}
 {% endblock %}
