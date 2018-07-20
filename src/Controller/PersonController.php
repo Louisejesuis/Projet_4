@@ -16,15 +16,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class PersonController extends Controller
 {
     /**
-     * @Route("/", name="person_index", methods="GET")
+     * @Route("/admin", name="person_index", methods="GET")
      */
     public function index(PersonRepository $personRepository): Response
     {
-        return $this->render('person/index.html.twig', ['people' => $personRepository->findAll()]);
+        $user = $this->getUser();
+        return $this->render('person/index.html.twig', ['people' => $personRepository->findAll(), 'user' => $user]);
     }
 
     /**
-     * @Route("/new", name="person_new", methods="GET|POST")
+     * @Route("/admin/new", name="person_new", methods="GET|POST")
      */
     public function new(Request $request): Response
     {
@@ -38,6 +39,9 @@ class PersonController extends Controller
             $em->flush();
 
             return $this->redirectToRoute('person_index');
+        } elseif ($this->getUser() != null ) {
+            return $this->redirectToRoute('index');
+            $this->addFlash('danger', 'Vous devez vous connecter pour poster une annonce');
         }
 
         return $this->render('person/new.html.twig', [
@@ -51,7 +55,8 @@ class PersonController extends Controller
      */
     public function show(Person $person): Response
     {
-        return $this->render('person/show.html.twig', ['person' => $person]);
+        $user = $this->getUser();
+        return $this->render('person/show.html.twig', ['person' => $person, 'user' => $user]);
     }
 
     /**
@@ -79,7 +84,7 @@ class PersonController extends Controller
      */
     public function delete(Request $request, Person $person): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$person->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $person->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($person);
             $em->flush();

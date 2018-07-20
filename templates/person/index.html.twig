@@ -3,21 +3,36 @@
 {% block title %}Annonce | Liste{% endblock %}
 
 {% block body %}
-
-    <h1>Liste des annonces</h1>
-
-    {% for person in people %}
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{ vich_uploader_asset(person, 'imageFile') }}" alt="Card image cap">
-        <div class="card-body">
-            <h3 class="card-text">{{ person.firstName }}{{ person.lastName }}</h3>
-            <div class="row">
-                <a href="{{ path('person_show', {'id': person.id}) }}" class="btn btn-primary">Voir l'annonce</a>
-                <a href="{{ path('person_edit', {'id': person.id}) }}" class="btn btn-primary">Éditer l'annonce</a>
-            </div>
+    <div class="row">
+        <div class="col-6">
+            <h1 class="my-4">Liste de mes annonces</h1>
+        </div>
+        <div class="col-6">
+            <a href="{{ path('person_new') }}" class="btn btn-light my-4">Créer une nouvelle annonce <i
+                        class="fas fa-plus fa-lg"></i></a>
 
         </div>
     </div>
-    {% endfor %}
-    <a href="{{ path('person_new') }}">Créer une nouvelle annonce</a>
+    <div class="row">
+        {% for person in people %}
+            {% if person.user.id == user.id %}
+                <div class="card m-4">
+                    <img class="card-img-top" src="{{ vich_uploader_asset(person, 'imageFile') }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h3 class="card-text">{{ person.firstName }}  {{ person.lastName }}</h3>
+                        <div class="row">
+                            <a href="{{ path('person_show', {'id': person.id}) }}"
+                               class="btn btn-outline-primary mr-3 ml-1">Voir
+                                l'annonce</a>
+                            <a href="{{ path('person_edit', {'id': person.id}) }}" class="btn btn-outline-primary ">Éditer
+                                l'annonce</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            {% endif %}
+        {% endfor %}
+    </div>
+
 {% endblock %}

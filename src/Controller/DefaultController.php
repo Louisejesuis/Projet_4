@@ -7,6 +7,7 @@
  */
 namespace App\Controller;
 
+use App\Repository\PersonRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,9 +20,9 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="index")
      */
-    public function index(): Response
+    public function index(PersonRepository $personRepository): Response
     {
-        return $this->render('index.html.twig');
+        return $this->render('index.html.twig', ['people' => $personRepository->findAll()]);
     }
 
     /**

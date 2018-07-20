@@ -81,6 +81,41 @@ class Person
      */
     private $language;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $quality;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $defect;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Gender", inversedBy="people")
+     */
+    private $gender;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $price;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $quote;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\School", inversedBy="people")
+     */
+    private $school;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="people")
+     */
+    private $user;
+
     public function getId()
     {
         return $this->id;
@@ -205,6 +240,94 @@ class Person
     function setLanguage(?Language $language): self
     {
         $this->language = $language;
+
+        return $this;
+    }
+
+    public function getQuality(): ?string
+    {
+        return $this->quality;
+    }
+
+    public function setQuality(string $quality): self
+    {
+        $this->quality = $quality;
+
+        return $this;
+    }
+
+    public function getDefect(): ?string
+    {
+        return $this->defect;
+    }
+
+    public function setDefect(string $defect): self
+    {
+        $this->defect = $defect;
+
+        return $this;
+    }
+
+    public function getGender(): ?Gender
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?Gender $gender): self
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param mixed $price
+     */
+    public function setPrice($price): void
+    {
+        $this->price = $price;
+    }
+
+    public function getQuote(): ?string
+    {
+        return $this->quote;
+    }
+
+    public function setQuote(string $quote): self
+    {
+        $this->quote = $quote;
+
+        return $this;
+    }
+
+    public function getSchool(): ?School
+    {
+        return $this->school;
+    }
+
+    public function setSchool(?School $school): self
+    {
+        $this->school = $school;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

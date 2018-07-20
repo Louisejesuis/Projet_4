@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="">Le Wild Coin School</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <a class="navbar-brand" href="{{ path('index') }}">Le Wild Coin School</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -9,17 +9,24 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('person_index') }}">Voir les annonces</a>
+                <a class="nav-link" href="{{ path('person_index') }}">Voir mes annonces</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('person_new') }}">Deposer une annonce</a>
             </li>
-            <li class="nav-item mx-3">
-                <a href="{{ path('security_login') }}" class="nav-link btn btn-secondary">Se connecter</a>
-            </li>
-            <li class="nav-item mx-3">
-                <a href="{{ path('user_registration') }}" class="nav-link btn btn-secondary">Créer un compte</a>
-            </li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item">
+                    <a href="{{ path('security_logout') }}" class="nav-link btn btn-secondary">Se deconnecter</a>
+                </li>
+            {% else %}
+                <li class="nav-item mx-3">
+                    <a href="{{ path('security_login') }}" class="nav-link btn btn-secondary">Se connecter</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a href="{{ path('user_registration') }}" class="nav-link btn btn-secondary">Créer un compte</a>
+                </li>
+
+            {% endif %}
         </ul>
     </div>
 </nav>
