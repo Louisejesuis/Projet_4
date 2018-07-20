@@ -1,0 +1,19 @@
+@import "_variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/united/bootswatch";
+.container-fluid-navbar {
+  padding: 0;
+}
+.card {
+  width: 20rem;
+}
+.picture {
+  width: 15rem;
+}
+.quote {
+  color: #f3a61f ;
+  font-style: italic;
+}
+body {
+  padding-top: 50px;
+}

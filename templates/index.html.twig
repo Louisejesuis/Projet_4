@@ -2,4 +2,23 @@
 
 {% block title %}Acceuil{% endblock %}
     {% block body %}
+        <div class="row">
+
+            {% for person in people %}
+                <div class="card m-3">
+                    <img class="card-img-top" src="{{ vich_uploader_asset(person, 'imageFile') }}"
+                         alt="Card image cap">
+                    <div class="card-body">
+                        <h3 class="card-text">{{ person.firstName }}  {{ person.lastName }}</h3>
+                        <div class="row">
+                            <a href="{{ path('person_show', {'id': person.id}) }}"
+                               class="btn btn-outline-primary mx-auto">Voir
+                                l'annonce</a>
+
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     {% endblock %}

@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="stylesheet" href="{{ asset('build/css/app.css') }}"/>
-    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/united/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-9nkB73MkhCaHgW6bdX2EbWnwXl8FUs1fTnR1UKUuic9Zqs/3u9VunCE/0hleKeUs" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('build/css/variable.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('/build/css/app.css') }}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+          integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+
     {% block stylesheets %}{% endblock %}
 <body>
 {% include 'include/navbar.html.twig' %}
 <div class="container">
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     {% block body %}{% endblock %}
 </div>
 {% block javascripts %}{% endblock %}
